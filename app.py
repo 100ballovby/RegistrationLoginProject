@@ -1,7 +1,5 @@
-from flask import Flask, render_template, flash, redirect, request, url_for
-from forms import RegisterForm, LoginForm
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash, generate_password_hash
 
 
 app = Flask(__name__)
