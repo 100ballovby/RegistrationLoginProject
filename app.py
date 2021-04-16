@@ -9,10 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
+from routes import *
 
 if __name__ == '__main__':
     app.run()
