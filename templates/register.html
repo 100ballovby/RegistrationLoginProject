@@ -2,4 +2,21 @@
 
 {% block content %}
 
+    <form>
+        <div class="mb-3">
+            <label class="form-label">{{ form.username.label }}</label>
+            {{ form.username(class="form-control") }}
+            <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.password.label }}</label>
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.password_again.label }}</label>
+            {{ form.password_again(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Регистрация</button>
+    </form>
+
 {% endblock %}
