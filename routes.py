@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, redirect, request, url_for
+from flask import render_template, flash, redirect, request, url_for, session
 from forms import RegisterForm, LoginForm
 from models import User
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -10,14 +10,25 @@ def main_page():
     return render_template('index.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login_page():
-    return render_template('login.html')
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate:
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:  # если пользователь есть в БД
+            if check_password_hash(user.password, form.password.data):
+                session['logged_in'] = True
+                session['username'] = user.username
+                return redirect(url_for('main_page'))
+            else:
+                return redirect(url_for('login_page'))
+    else:
+        return render_template('login.html', form=form)
 
 
 @app.route('/register', methods=['POST', 'GET'])
 def register_page():
-    form = RegisterForm()
+    form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         hashed_password = generate_password_hash(
             form.password.data,
