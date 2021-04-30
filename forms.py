@@ -7,11 +7,11 @@ from wtforms.validators import InputRequired
 class RegisterForm(FlaskForm):
     username = StringField('Имя пользователя',
                            validators=[InputRequired()])
-    password = StringField('Пароль',
-                           validators=[InputRequired()])
+    password = StringField('Пароль', validators=[InputRequired(),
+                                                 EqualTo(fieldname='password_again',
+                                                         message='Passwords must be equal')])
     password_again = StringField('Пароль (еще раз)',
-                                 validators=[InputRequired(),
-                                             EqualTo('password')])
+                                 validators=[InputRequired()])
 
 
 class LoginForm(FlaskForm):
