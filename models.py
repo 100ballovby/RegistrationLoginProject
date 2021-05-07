@@ -8,7 +8,6 @@ class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
-    email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(100))
 
     def set_password(self, password):
@@ -16,15 +15,6 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-
-    def is_active(self):
-        return True
-
-    def get_id(self):
-        return self.username
-
-    def is_anonymous(self):
-        return False
 
 
 
