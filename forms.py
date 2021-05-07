@@ -11,9 +11,11 @@ class RegisterForm(FlaskForm):
                                                          message='Passwords must be equal')])
     password_again = PasswordField('Пароль (еще раз)',
                                  validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Зарегистрироваться')
 
 
 class LoginForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
+    rememberMe = BooleanField('Запомнить меня')
+    submit = SubmitField('Войти')
